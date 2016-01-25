@@ -1,6 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<%
+String id = "";
+String lastTime="";
+//현재 저장된 모든 쿠키를 불러온다.
+Cookie[] cookies = request.getCookies();
+//쿠키가 있는지 검사.
+if(cookies != null && cookies.length > 0 ){
+	//받아온 쿠키만큼 반복문으로 검사를 수행.
+	for(int i = 0 ; i < cookies.length ; i++){
+		//로그인 성공시 만들어진 id라는 이름을 가져온다.
+		if(cookies[i].getName().equals("id")){// ???
+			id=cookies[i].getValue();
+		}
+		if(cookies[i].getName().equals("lastTime")){
+			lastTime=cookies[i].getValue();
+		}
+	}
+}
+
+%>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -54,22 +75,26 @@
       </div>
 </div>
     <div class="container">
-
+		
       <form class="form-signin" action="MemberLogin" method="POST">
         <h2 class="form-signin-heading">로그인@</h2>
         <label for="inputEmail" class="sr-only">ID</label>
-        <input type="text" id="userid" name="userid" class="form-control" placeholder="ID" required autofocus>
+        <!--  placeholder="ID"   placeholder="Password"  required autofocus -->
+        <input type="text" id="userid" name="userid" class="form-control" value=<%=id%> >
         
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+        <input type="password" id="password" name="password" class="form-control" required>
         <div class="checkbox">
           <label>
-            <input type="checkbox" value="remember-me"> Remember me
+            <input type="checkbox" id="idstore" name="idstore" value="store" checked>ID 저장
           </label>
         </div>
         <input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign in">
       </form>
-
+마지막 로그인 시간::<%=lastTime %>
+<!--  Session 으로  index페이지로 넘어가서 주는거랑
+아직 처리를 안해서 .. Cookies를 이용하여 LoginPage에서 확인하는거랑.
+비슷하다. -->
     </div> <!-- /container -->
 
 

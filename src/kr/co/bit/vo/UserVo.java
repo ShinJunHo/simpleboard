@@ -1,6 +1,8 @@
 package kr.co.bit.vo;
 
-public class UserVo {
+import java.io.Serializable;
+
+public class UserVo implements Serializable{
 	
 	
 	private String id;
