@@ -70,8 +70,9 @@ String date = (String)session.getAttribute("date");
 	<%}else{ %>
 		<!--  세션이 있을때 게시판 보기가 나와야 합니다. -->
 		로그인 정보:<%=loginId %><br/>
+		<!-- login controller에서 주석처리를 해놨다. -->
 		시간정보: <%=date %>	<br/>
-		Nav를 로그인 -> 로그아웃으로 바꿔야겠다.<br/>
+		Nav 항목을 (로그인) -> (로그아웃)으로 바꿔야겠다.<br/>
 	<a href="Board">게시판보기</a>
 	<a href="#">회원정보 보기.</a>
 	<a href="MemberLogout">로그아웃</a>

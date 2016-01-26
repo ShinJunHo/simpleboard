@@ -86,7 +86,8 @@ public class LoginController extends HttpServlet {
 			//세션 객체를 가지고 온다.
 			request.getSession().setAttribute("LOGINID",userId );
 			//세션에 로그인 시간을 넣을 수 있지 않을까 했다.
-			//2) Session에 추가를 해서 보여주기.
+			
+			//2) Session에 추가를 해서 보여주기. index.jsp에서 보려고.
 			//request.getSession().setAttribute("date", date);
 			response.sendRedirect("index.jsp");
 		}else{

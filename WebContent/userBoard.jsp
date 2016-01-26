@@ -16,10 +16,12 @@
 <body>
 	<h1><a href="index.jsp">홈으로</a></h1><hr/>
 	<%=beans.getId() %> 님 환영합니다.<br/>
+	<h1><a href="userboarddetail.jsp?mode=write">게시글쓰기</a><br/></h1>
 	<% for( BoardVo b : list) {%>
 	<b><%=b.getBoard_seq() %></b>
+	<a href ="UserboardDetail?seq=<%=b.getBoard_seq()%>&mode=read">
+	<b><%=b.getTitle() %></b></a>
 	<b><%=b.getId() %></b>
-	<a href=""><b><%=b.getTitle() %></b></a>
 	<b><%=b.getModi_date() %></b>
 	<br/>
 	<%} %>
