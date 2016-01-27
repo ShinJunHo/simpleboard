@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +28,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public boolean userInsert(Map<String, String> mParam) {
 		// TODO Auto-generated method stub
-		String query="insert into tb_user values(user_seq.nextval,?,?,?,?,?,sysdate)";
+		String query="insert into tb_user values(user_seq.nextval,?,?,?,?,?,sysdate,?)";
 		try{
 			pstmt = conn.prepareStatement(query);
 
@@ -36,6 +37,8 @@ public class UserDaoImpl implements UserDao {
 			pstmt.setString(3, mParam.get("email"));
 			pstmt.setString(4, mParam.get("phone"));
 			pstmt.setInt(5, Integer.valueOf(mParam.get("age")));
+			pstmt.setString(6, mParam.get("picture"));
+			// input의 type file 의 name
 			
 			pstmt.executeUpdate();
 			
@@ -76,6 +79,7 @@ public class UserDaoImpl implements UserDao {
 		return null;
 	}
 	public boolean login(String id, String password){
+		//RA-00937: 단일 그룹의 그룹 함수가 아닙니다 Result로 하나만 나온다.?. Decode를 써서 단일 그룹으로 만 써야한다.
 		String sql = "select DECODE (count(*),1,'TRUE',0,'FALSE') as Login from tb_user where user_id=? and password=?";
 		try{
 			pstmt = conn.prepareStatement(sql);
@@ -93,10 +97,30 @@ public class UserDaoImpl implements UserDao {
 				return true;
 			else
 				return false;
+			
 		}catch(SQLException ex){
 			ex.printStackTrace();
 			return false;
 		}
+	}
+	public String picutre(String id, String password){
+		String sql = "select PICTURE from tb_user where user_id=? and password=?";
+		try{
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, password);
+			
+			rs = pstmt.executeQuery();
+			rs.next();
+			
+			String location = rs.getString("PICTURE");
+			return location;
+			
+		}catch(SQLException ex){
+			ex.printStackTrace();
+			return null;
+		}
+		
 	}
 
 }

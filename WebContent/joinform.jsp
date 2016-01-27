@@ -71,12 +71,13 @@ Optional theme
 	<div class="centeringContainer">
 		<span class="centered">
 			<hr />
-			<form action="Memberjoin" method="POST">
+			<form action="Memberjoin" method="POST" enctype="multipart/form-data">
 				ID :<input type="text" name="ID"><br>
 				Password:<input type="password" name="PW"><br> 
 				EMAIL :<input type="text" name="EMAIL"><br>
 				PHONE :<input type="text" name="PHONE"><br> 
 				AGE :<input type="text" name="AGE" maxlength="3"><br>
+				Picture : <input type="file" name="picture"><br/>
 				<input type="submit" value="확인">
 			</form>
 		</span>

@@ -3,6 +3,7 @@ package kr.co.bit.controller;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -52,14 +53,18 @@ public class LoginController extends HttpServlet {
 		String password = request.getParameter("password");
 		
 		System.out.println(userId+password);
+		//String savePath = request.getRealPath("/images");
 		
 		UserDaoImpl userDao = new UserDaoImpl(DBUtil.getDBConnection());
-		boolean isLogin = userDao.login(userId, password);
+		boolean loginResult = userDao.login(userId, password);
+		String location = userDao.picutre(userId, password);
+		
 		DBUtil.releaseConnection();
 		DBUtil.releaseStatement(userDao.getPstmt());
 		DBUtil.releaseResultSet(userDao.getRs());
 		
-		if(isLogin){
+		
+		if(loginResult){
 			//성공시
 			// '/'가 붙는 이유는 무엇일까 ? sendRedirect 했을때 
 			// 프로젝트명을 설정을 안해줬기에. 나중엔 '/'을 붙여주고.
@@ -84,7 +89,10 @@ public class LoginController extends HttpServlet {
 			
 			//getSession() 메소드를 통해
 			//세션 객체를 가지고 온다.
+			
 			request.getSession().setAttribute("LOGINID",userId );
+			request.getSession().setAttribute("picture", location);
+			
 			//세션에 로그인 시간을 넣을 수 있지 않을까 했다.
 			
 			//2) Session에 추가를 해서 보여주기. index.jsp에서 보려고.

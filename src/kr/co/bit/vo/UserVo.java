@@ -10,7 +10,14 @@ public class UserVo implements Serializable{
 	private String email;
 	private String phone;
 	private int age;
+	private String picture;
 	
+	public String getPicture() {
+		return picture;
+	}
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
 	public String getId() {
 		return id;
 	}
@@ -44,7 +51,8 @@ public class UserVo implements Serializable{
 	@Override
 	public String toString() {
 		return "UserVo [id=" + id + ", password=" + password + ", email="
-				+ email + ", phone=" + phone + ", age=" + age + "]";
+				+ email + ", phone=" + phone + ", age=" + age + ", picture="
+				+ picture + "]";
 	}
 	
 }

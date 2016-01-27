@@ -12,6 +12,6 @@ public interface BoardDao {
 	
 	public BoardVo userBoardDetail(int seq);
 	public boolean boardInsert(Map<String,String> mParam);
-	public void update(Map<String, String> mParam);
+	public boolean boardModify(Map<String, String> mParam);
 	public void deleteItem(int seq);
 }

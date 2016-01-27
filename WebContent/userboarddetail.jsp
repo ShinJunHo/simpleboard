@@ -24,13 +24,18 @@
 <title>Insert title here</title>
 	<script type="text/javascript">
 	
-		function updateItem(){
-			//혹시 if else 문으로 update mode를 해서 더 해야하는건가?.
-			//alert("update");
-			document.getElementById("mode").value = "update";
-			//Ajax 써야할듯한데.
-			//window.location.href="BoardUpdateController";
-			console.log(document.getElementById("mode").value);
+		function modifyMode(){
+			var mode = document.getElementsByName("mode");
+			mode[0].value="modify";
+			
+			var content =document.getElementsByName("content");
+			content[0].readOnly=false;
+			
+			var title = document.getElementsByName("title");
+			title[0].readOnly=false;
+			
+			var btn_submit =document.getElementById("sub");
+			btn_submit.value="수정 완료"
 		}
 		
 		
@@ -42,8 +47,10 @@
 </head>
 <body>
 	<center>
+	<!--  BoardInsertController의 안쪽에서 모드에 따른 분기 --> 
+	 <!-- 모드 검사 후 Action 변경 따로 나누는 방법이 있고, 단순  입출력에서 봤을땐  -->
 	<form action="BoardInsertContrller" method="POST" >
-		<input type="hidden" id="seq" value="<%=b.getBoard_seq() %>">
+		<input type="hidden" id="seq" name="seq" value="<%=b.getBoard_seq() %>">
 		작성자 : <% if(mode.equals("read")){ %>
 				<%=FunctionClass.getString(b.getId())%>
 			<%}else if(mode.equals("write")){ %>
@@ -57,23 +64,23 @@
 				<%}%>><br/>
 		내용 :<br/>
 			<!-- 지금은 Read Only -->
-		<textarea name="contents" rows="10" cols="50" <% if(mode.equals("read")){ %>
+		<textarea name="content" rows="10" cols="50" <% if(mode.equals("read")){ %>
 					readonly="readonly"
 					<%} %>>
 		<%=FunctionClass.getString(b.getContents()) %> 
 		</textarea><br/>
 		
-		<input type="submit" value="등록">
+		<input id="sub" type="submit" value="등록">
 		<!--  로그인 아이디와 작성자 아이다가 같을때 만 수정 & 삭제. -->
 		<% if(!mode.equals("write")) {%>
 			<% if(LoginUser.equals(writer)){ %>
-			<input type="button" id="update" value="수정" onclick="updateItem()">
+			<input type="button" id="update" value="수정" onclick="modifyMode()">
 			<input type="button" id="delete" value="삭제" onclick="deleteItem()">
 			<%} %>
 		<%} %>
 		<button>목록</button>
 		<!-- hidden을 통해 서블릿에서 어떠한 행도을 할 것인지 결정한다. -->
-		<input type="hidden" id="mode" name="mode" value="<%=mode %>">
+		<input type="text" id="mode" name="mode" value="<%=mode %>">
 	</form>
 	</center>
 </body>

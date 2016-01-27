@@ -46,19 +46,28 @@ public class BoardInsertContrller extends HttpServlet {
 		//세션에서 ID 받아오기,
 		String userid = (String)request.getSession().getAttribute("LOGINID");
 		String title = request.getParameter("title");
-		String contents = request.getParameter("contents").trim();
-		
-		
+		String content = request.getParameter("content").trim();
+		String seq = request.getParameter("seq");
+		String mode = request.getParameter("mode");
+		System.out.println("mode::"+mode);
 		BoardDaoImpl boardDao = new BoardDaoImpl(DBUtil.getDBConnection());
 		Map<String,String> map = new HashMap<String,String>();
+		
+		boolean flag =false;
 		map.put("userid", userid);
 		map.put("title", title);
-		map.put("contents", contents);
-		boolean flag = boardDao.boardInsert(map);
+		map.put("content", content);
+		map.put("seq",seq);
+		
+		if(mode.equals("write")){
+			flag = boardDao.boardInsert(map);
+		}else if(mode.equals("modify")){
+			flag = boardDao.boardModify(map);
+		}
 		
 		if(flag != true){
 			System.out.println("입력 실패.");
-			
+			response.sendRedirect("Board");
 		}else{
 			System.out.println("입력 성공.");
 			//board servlet호출해서 게시판으로.

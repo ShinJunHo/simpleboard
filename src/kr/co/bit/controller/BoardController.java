@@ -62,7 +62,7 @@ public class BoardController extends HttpServlet {
 		
 		//전체검색
 		List<BoardVo> mBoardArr = boardDao.selectBoard(Constants.WHOLE, "");
-		System.out.println("Board"+mBoardArr);
+		//System.out.println("Board"+mBoardArr);
 		DBUtil.releaseStatement(boardDao.getPstmt());
 		DBUtil.releaseConnection();
 		

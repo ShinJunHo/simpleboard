@@ -13,6 +13,10 @@ CREATE TABLE TB_USER(
 	JOINDATE DATE
 );
 
+alter table TB_USER add(picture varchar2(100));
+desc TB_USER;
+
+
 CREATE TABLE TB_BOARD(
           SEQ NUMBER NOT NULL,
           USER_ID VARCHAR2(20),

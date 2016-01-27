@@ -111,7 +111,7 @@ public class BoardDaoImpl implements BoardDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mParam.get("userid"));
 			pstmt.setString(2, mParam.get("title"));
-			pstmt.setString(3, mParam.get("contents"));
+			pstmt.setString(3, mParam.get("content"));
 			
 			pstmt.executeUpdate();
 			return true;
@@ -121,16 +121,27 @@ public class BoardDaoImpl implements BoardDao {
 		}
 	}
 	@Override
-	public void update(Map<String, String> mParam) {
+	public boolean boardModify(Map<String, String> mParam) {
 		// TODO Auto-generated method stub
-		String sql = "update TB_BOARD set TITLE = ?,CONTENTS = ? where USER_ID = ?";
+		String sql = "update TB_BOARD set TITLE = ?,CONTENTS = ? where USER_ID = ? and SEQ = ?";
+		System.out.println("seq"+mParam.get("seq"));
+		System.out.println("content"+mParam.get("content"));
+		System.out.println("userid"+mParam.get("userid"));
+		System.out.println("title"+mParam.get("title"));
 		try{
+			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, mParam.get(""));
-			pstmt.setString(2, mParam.get(""));
-			pstmt.setString(3, mParam.get(""));
+			pstmt.setString(1, mParam.get("title"));
+			pstmt.setString(2, mParam.get("content"));
+			pstmt.setString(3, mParam.get("userid"));
+			pstmt.setInt(4, Integer.valueOf(mParam.get("seq")));
+			
+			pstmt.executeUpdate();
+			return true;
+			
 		}catch(SQLException e){
 			e.printStackTrace();
+			return false;
 			
 		}
 	}

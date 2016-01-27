@@ -9,4 +9,34 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  <!-- 307 임시로 페이지가 리다이렉트 됨 -->
+  <!-- 400 클라이언트의 요청이 잘못된 구문으로 구성됨 -->
+  <!-- 401 접근이 허용되지 않음 -->
+  <!-- 404 지정된 URL에 접속 할 수 없음(처리 자원이 없음) -->
+  <!-- 405 요청된 메소드가 허용 불가-->
+  <!-- 500 서부 내부 에러-->
+  <!-- 503 일시적으로 서비스를 제공할 수 없음-->
+  <error-page>
+  	<error-code>400</error-code>
+  	<location>/error/error400.jsp</location>
+  </error-page>
+   <error-page>
+  	<error-code>401</error-code>
+  	<location>/error/error401.jsp</location>
+  </error-page>
+  <error-page>
+  	<error-code>404</error-code>
+  	<location>/error/error404.jsp</location>
+  </error-page>
+   <error-page>
+  	<error-code>405</error-code>
+  	<location>/error/error405.jsp</location>
+  </error-page>
+   <error-page>
+  	<error-code>500</error-code>
+  	<location>/error/error500.jsp</location>
+  </error-page>
+ 
+  
 </web-app>

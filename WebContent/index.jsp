@@ -21,6 +21,7 @@
 <% 
 String loginId=(String)session.getAttribute("LOGINID");
 beans.setId(loginId);
+String picture=(String)session.getAttribute("picture");
 
 loginId = FunctionClass.getString(loginId); 
 String date = (String)session.getAttribute("date");
@@ -78,5 +79,6 @@ String date = (String)session.getAttribute("date");
 	<a href="MemberLogout">로그아웃</a>
 		</center>
 	<%} %>
+	<img src="/simpleboard/images/<%=picture%>" style="width: 40px; height:40px" />
 </body>
 </html>
